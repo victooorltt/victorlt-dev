@@ -1,0 +1,163 @@
+---
+import type { Project, Locale } from '../types';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = useTranslations(locale);
+
+const subtitle = project.subtitle[locale];
+const description = project.description[locale];
+const technicalPoints = project.technicalPoints[locale];
+const details = project.details ? project.details[locale] : null;
+---
+
+<article class="bg-white rounded-2xl subtle-border subtle-border-hover p-6 sm:p-8 flex flex-col justify-between transition-all duration-200">
+  <div>
+    <!-- Top Metadata: Period + Status -->
+    <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+      <div class="flex items-center gap-2">
+        <span class="font-mono-code text-xs font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-700 border border-slate-200/60">
+          {project.period}
+        </span>
+        {project.isPrivate ? (
+          <span class="inline-flex items-center gap-1 font-mono-code text-[11px] font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200/60">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span>{t.work.privateRepo}</span>
+          </span>
+        ) : (
+          <span class="inline-flex items-center gap-1 font-mono-code text-[11px] font-medium px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200/60">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+            <span>Production / System</span>
+          </span>
+        )}
+      </div>
+
+      <!-- Action Links -->
+      <div class="flex items-center gap-2">
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 transition-colors"
+            aria-label={`${t.work.viewCode} - ${project.title}`}
+          >
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+        )}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-xs"
+            aria-label={`${t.work.liveDemo} - ${project.title}`}
+          >
+            <span>{t.work.liveDemo}</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Title & Subtitle -->
+    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+      {project.title}
+    </h3>
+    <p class="mt-2 text-sm sm:text-base font-medium text-slate-700">
+      {subtitle}
+    </p>
+
+    <!-- Detailed Overview -->
+    <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+      {description}
+    </p>
+
+    <!-- Technical Implementation Highlights -->
+    <div class="mt-5 pt-4 border-t border-slate-100">
+      <h4 class="text-xs font-mono-code font-semibold uppercase tracking-wider text-slate-400 mb-2.5">
+        {t.work.techPointsTitle}
+      </h4>
+      <ul class="space-y-2">
+        {technicalPoints.map((point) => (
+          <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 leading-snug">
+            <span class="text-blue-600 mt-1 flex-shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- In-place Expandable Deep Dive (Native HTML5 details) -->
+    {details && (
+      <details class="mt-4 pt-3 border-t border-slate-100 group/details">
+        <summary class="cursor-pointer select-none list-none flex items-center justify-between py-1 text-xs font-mono-code font-medium text-blue-600 hover:text-blue-700 transition-colors focus:outline-none">
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 group-open/details:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>{t.work.deepDiveBtn}</span>
+          </span>
+          <span class="text-slate-400 text-[11px] group-open/details:hidden">({locale === 'en' ? 'Click to inspect' : 'Clic para desplegar'})</span>
+        </summary>
+
+        <div class="mt-3 pl-4 border-l-2 border-blue-200/80 space-y-3 py-1 animate-fadeIn">
+          {details.architecture && details.architecture.length > 0 && (
+            <div>
+              <p class="font-mono-code text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">
+                {t.work.architecture}
+              </p>
+              <ul class="space-y-1.5">
+                {details.architecture.map((item) => (
+                  <li class="text-xs text-slate-600 leading-relaxed list-disc list-inside">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {details.challenges && details.challenges.length > 0 && (
+            <div>
+              <p class="font-mono-code text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">
+                {t.work.challenges}
+              </p>
+              <ul class="space-y-1.5">
+                {details.challenges.map((item) => (
+                  <li class="text-xs text-slate-600 leading-relaxed list-disc list-inside">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </details>
+    )}
+  </div>
+
+  <!-- Tech Badges Footer -->
+  <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-1.5">
+    {project.technologies.map((tech) => (
+      <span class="font-mono-code text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/70">
+        {tech}
+      </span>
+    ))}
+  </div>
+</article>

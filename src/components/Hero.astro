@@ -1,0 +1,149 @@
+---
+import type { Locale } from '../types';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 items-center">
+      
+      <!-- Left Column: Copy & CTAs -->
+      <div class="md:col-span-7 lg:col-span-8 order-2 md:order-1 text-left">
+        
+        <!-- Live Status Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="font-mono-code text-xs font-medium text-slate-700">
+            {t.hero.badge}
+          </span>
+        </div>
+
+        <!-- Name & Core Headline -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 text-balance">
+          {t.hero.name}
+        </h1>
+
+        <p class="mt-4 text-xl sm:text-2xl font-medium text-blue-600 tracking-tight">
+          {t.hero.thesis}
+        </p>
+
+        <!-- Brief context -->
+        <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+          {t.hero.subtext}
+        </p>
+
+        <!-- Academic & Location badge -->
+        <div class="mt-4 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono-code text-slate-500">
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>{t.hero.location}</span>
+          </span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-wrap items-center gap-3.5">
+          <a
+            href="#work"
+            class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 hover:bg-blue-600 rounded-lg transition-all shadow-xs hover:shadow-md"
+          >
+            <span>{t.hero.viewWork}</span>
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+
+          <a
+            href="/Victor_Lasheras_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 rounded-lg transition-all shadow-xs"
+          >
+            <svg class="mr-2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>{t.hero.downloadCv}</span>
+          </a>
+        </div>
+
+        <!-- Secondary Links -->
+        <div class="mt-8 pt-6 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-sm text-slate-600">
+          <a
+            href="https://github.com/victooorltt"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors font-medium"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/victor-lasheras"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors font-medium"
+          >
+            <svg class="w-4 h-4 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24m1.4 9.74v-8.37H5.06v8.37h2.8z" />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="mailto:victorlasheras2006@gmail.com"
+            class="inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors font-medium"
+          >
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Subtle Profile Photo -->
+      <div class="md:col-span-5 lg:col-span-4 order-1 md:order-2 flex justify-center md:justify-end">
+        <div class="relative group">
+          <!-- Subtle decorative card backing -->
+          <div class="absolute -inset-1.5 bg-gradient-to-tr from-slate-200 to-blue-100 rounded-2xl blur-xs opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          
+          <div class="relative bg-white p-2 rounded-2xl subtle-border shadow-xs">
+            <img
+              src="/images/victor.jpg"
+              alt="Víctor Lasheras Tejedor"
+              width="280"
+              height="280"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+              class="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover object-center rounded-xl bg-slate-100"
+            />
+
+            <!-- Subtle caption badge -->
+            <div class="mt-2 text-center">
+              <p class="font-mono-code text-[11px] text-slate-500 font-medium">
+                Víctor Lasheras · Software Eng.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

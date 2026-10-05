@@ -1,0 +1,102 @@
+---
+import type { Locale } from '../types';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const siteUrl = 'https://victorlt.dev';
+const canonicalUrl = locale === 'es' ? `${siteUrl}/es` : siteUrl;
+const enUrl = `${siteUrl}/`;
+const esUrl = `${siteUrl}/es`;
+const ogImageUrl = `${siteUrl}/images/victor.jpg`;
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: 'Víctor Lasheras Tejedor',
+      givenName: 'Víctor',
+      familyName: 'Lasheras Tejedor',
+      url: siteUrl,
+      image: ogImageUrl,
+      jobTitle: 'Software Engineering Student & Developer',
+      description: t.meta.description,
+      email: 'mailto:victorlasheras2006@gmail.com',
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Universidad de Oviedo',
+        url: 'https://www.uniovi.es'
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Oviedo',
+        addressRegion: 'Asturias',
+        addressCountry: 'ES'
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/victor-lasheras',
+        'https://github.com/victooorltt',
+        'https://ltevo.com'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Víctor Lasheras Tejedor — victorlt.dev',
+      description: t.meta.description,
+      publisher: {
+        '@id': `${siteUrl}/#person`
+      },
+      inLanguage: locale === 'es' ? 'es-ES' : 'en-US'
+    }
+  ]
+};
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Primary Meta Tags -->
+<title>{t.meta.title}</title>
+<meta name="title" content={t.meta.title} />
+<meta name="description" content={t.meta.description} />
+<meta name="keywords" content={t.meta.keywords} />
+<meta name="author" content="Víctor Lasheras Tejedor" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Alternates & Hreflang -->
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="es" href={esUrl} />
+<link rel="alternate" hreflang="x-default" href={enUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={t.meta.title} />
+<meta property="og:description" content={t.meta.description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+<meta property="og:site_name" content="Víctor Lasheras Tejedor" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={t.meta.title} />
+<meta property="twitter:description" content={t.meta.description} />
+<meta property="twitter:image" content={ogImageUrl} />
+
+<!-- Structured Data (Schema.org) -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

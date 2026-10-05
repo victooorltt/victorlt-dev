@@ -1,0 +1,23 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment variables & local configs
+.env
+.env.production
+.env.local
+.env.*.local
+
+# Vercel deployment cache
+.vercel/
+
+# OS and Editor metadata
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

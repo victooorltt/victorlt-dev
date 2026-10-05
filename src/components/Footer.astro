@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../types';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-12 border-t border-slate-200/80 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-slate-500">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span>{currentYear} {t.footer.rights}</span>
+    </div>
+
+    <p class="text-center sm:text-right text-slate-400">
+      {t.footer.builtWith}
+    </p>
+
+    <div>
+      <a href="#top" class="text-slate-600 hover:text-blue-600 transition-colors">
+        ↑ {locale === 'en' ? 'Back to top' : 'Volver arriba'}
+      </a>
+    </div>
+  </div>
+</footer>
