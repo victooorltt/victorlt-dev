@@ -11,21 +11,14 @@ const t = useTranslations(locale);
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-12 border-t border-slate-200/80 bg-white">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-slate-500">
-    <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      <span>{currentYear} {t.footer.rights}</span>
-    </div>
-
-    <p class="text-center sm:text-right text-slate-400">
-      {t.footer.builtWith}
+<footer class="py-8 border-t border-neutral-200/60 text-xs text-neutral-400">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+    <p>
+      © {currentYear} Víctor Lasheras Tejedor
     </p>
 
-    <div>
-      <a href="#top" class="text-slate-600 hover:text-blue-600 transition-colors">
-        ↑ {locale === 'en' ? 'Back to top' : 'Volver arriba'}
-      </a>
-    </div>
+    <a href="#top" class="hover:text-neutral-900 transition-colors">
+      ↑ {locale === 'en' ? 'Top' : 'Arriba'}
+    </a>
   </div>
 </footer>

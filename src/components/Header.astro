@@ -13,8 +13,6 @@ const navItems = [
   { label: t.nav.work, href: '#work' },
   { label: t.nav.experience, href: '#experience' },
   { label: t.nav.about, href: '#about' },
-  { label: t.nav.technologies, href: '#technologies' },
-  { label: t.nav.certifications, href: '#certifications' },
   { label: t.nav.contact, href: '#contact' },
 ];
 
@@ -22,150 +20,51 @@ const targetEnUrl = '/';
 const targetEsUrl = '/es';
 ---
 
-<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#fafafa]/85 border-b border-slate-200/70 transition-all duration-200">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <!-- Brand / Monogram -->
-    <a href={locale === 'es' ? '/es' : '/'} class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md p-1 -m-1">
-      <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white font-mono-code font-bold text-sm tracking-tight group-hover:bg-blue-600 transition-colors shadow-xs">
-        VL
-      </div>
-      <span class="font-mono-code text-sm font-semibold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
-        victorlt<span class="text-blue-600">.dev</span>
-      </span>
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#fafafa]/90 border-b border-neutral-200/60">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <!-- Brand Name -->
+    <a href={locale === 'es' ? '/es' : '/'} class="text-sm font-semibold text-neutral-900 hover:text-neutral-600 transition-colors">
+      Víctor Lasheras
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-6" aria-label="Main Navigation">
+    <nav class="hidden sm:flex items-center gap-6" aria-label="Main Navigation">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors py-1"
+          class="text-xs font-medium text-neutral-500 hover:text-neutral-900 transition-colors"
         >
           {item.label}
         </a>
       ))}
     </nav>
 
-    <!-- Right Actions: Language Switcher + CV -->
-    <div class="hidden md:flex items-center gap-3">
-      <!-- Language Switcher -->
-      <div class="flex items-center p-1 bg-slate-100 rounded-lg border border-slate-200/60 font-mono-code text-xs font-medium" role="group" aria-label="Language Selector">
+    <!-- Language Switcher & CV -->
+    <div class="flex items-center gap-4 text-xs font-medium">
+      <div class="flex items-center gap-1 text-neutral-400">
         <a
           href={targetEnUrl}
-          class={`px-2 py-1 rounded transition-colors ${locale === 'en' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'text-slate-500 hover:text-slate-900'}`}
-          aria-current={locale === 'en' ? 'true' : undefined}
+          class={`hover:text-neutral-900 transition-colors ${locale === 'en' ? 'text-neutral-900 font-semibold' : ''}`}
         >
           EN
         </a>
-        <span class="text-slate-300 mx-0.5">/</span>
+        <span>/</span>
         <a
           href={targetEsUrl}
-          class={`px-2 py-1 rounded transition-colors ${locale === 'es' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'text-slate-500 hover:text-slate-900'}`}
-          aria-current={locale === 'es' ? 'true' : undefined}
+          class={`hover:text-neutral-900 transition-colors ${locale === 'es' ? 'text-neutral-900 font-semibold' : ''}`}
         >
           ES
         </a>
       </div>
 
-      <!-- CV CTA -->
       <a
         href="/Victor_Lasheras_CV.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-blue-600 rounded-lg transition-colors shadow-xs"
+        class="text-neutral-900 hover:text-blue-600 font-semibold transition-colors"
       >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <span>CV</span>
-      </a>
-    </div>
-
-    <!-- Mobile Menu Trigger -->
-    <div class="flex items-center gap-2 md:hidden">
-      <!-- Mobile Language Switcher -->
-      <div class="flex items-center p-0.5 bg-slate-100 rounded-md border border-slate-200/60 font-mono-code text-[11px] font-medium mr-1">
-        <a
-          href={targetEnUrl}
-          class={`px-1.5 py-0.5 rounded ${locale === 'en' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'text-slate-500'}`}
-        >
-          EN
-        </a>
-        <a
-          href={targetEsUrl}
-          class={`px-1.5 py-0.5 rounded ${locale === 'es' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'text-slate-500'}`}
-        >
-          ES
-        </a>
-      </div>
-
-      <button
-        id="mobile-menu-btn"
-        type="button"
-        class="p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-        aria-label="Toggle Navigation Menu"
-        aria-expanded="false"
-        aria-controls="mobile-nav"
-      >
-        <svg id="menu-icon-open" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Dropdown Nav -->
-  <div id="mobile-nav" class="hidden md:hidden border-b border-slate-200 bg-[#fafafa]/95 backdrop-blur-md px-4 pt-2 pb-5 space-y-2">
-    {navItems.map((item) => (
-      <a
-        href={item.href}
-        class="block px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-100"
-      >
-        {item.label}
-      </a>
-    ))}
-    <div class="pt-3 border-t border-slate-200">
-      <a
-        href="/Victor_Lasheras_CV.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-xs font-semibold text-white bg-slate-900 hover:bg-blue-600 rounded-lg transition-colors"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <span>{t.nav.downloadCv}</span>
+        CV ↗
       </a>
     </div>
   </div>
 </header>
-
-<script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const nav = document.getElementById('mobile-nav');
-  const iconOpen = document.getElementById('menu-icon-open');
-  const iconClose = document.getElementById('menu-icon-close');
-
-  if (btn && nav && iconOpen && iconClose) {
-    btn.addEventListener('click', () => {
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isExpanded));
-      nav.classList.toggle('hidden');
-      iconOpen.classList.toggle('hidden');
-      iconClose.classList.toggle('hidden');
-    });
-
-    // Close mobile nav when clicking a link
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        nav.classList.add('hidden');
-        btn.setAttribute('aria-expanded', 'false');
-        iconOpen.classList.remove('hidden');
-        iconClose.classList.add('hidden');
-      });
-    });
-  }
-</script>
